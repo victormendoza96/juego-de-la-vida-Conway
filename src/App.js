@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
-  
+import Grid from './components/grid'
 import './App.css';
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      generation: 0,
+    }
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <h1>the game of life</h1>
+        <Grid/>
+        <h2>generation: {this.state.generation}</h2>
       </div>
     );
   }
