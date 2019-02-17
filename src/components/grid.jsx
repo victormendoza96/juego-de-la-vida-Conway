@@ -4,19 +4,16 @@ import Cell from './cell'
 export default class Grid extends Component{
 
   buildtable = ()=>{
-    var newtable =  this.props.table 
+    var newtable =  this.props.table.map(el => el)
       newtable.map((el, i)=>{ 
-        
           el.map((col,j)=>{
-            let classcCell = newtable[i][j]? "life" : "died"
-            
-              newtable[i][j] = true
-             let hola = "ahola"
-          })
+           
+            let classCell = newtable[i][j] ? "life" : "died";
+            newtable.push(<Cell classCell={classCell}/>)
         
+          }) 
       }) 
-      console.log(newtable);
-      console.log(this.props.table);
+    
     return newtable
   }
 

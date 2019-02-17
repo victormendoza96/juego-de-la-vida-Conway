@@ -15,6 +15,11 @@ class App extends Component {
     }
    
   }
+
+  play = ()=>{
+
+  }
+  
   render() {
     return (
       <div>
