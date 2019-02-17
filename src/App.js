@@ -8,20 +8,23 @@ class App extends Component {
     this.fils = 52;
     this.cols = 32;
     this.timeGeneration = 100;
-    this.state = {
+    this.state = {//lo que puede cambiar mientras se ejecuta el juego
       generations: 1,
-      table: Array((this.fils )).fill(Array(this.cols ).fill(false))
+      table: Array((this.fils)).fill(Array(this.cols ).fill(false))//llenar arreglo de celulas muertas
       
     }
    
   }
+  //paso la fila y columna clikeada
   clickCell = (fil, col)=>{
     let table = this.state.table.map(e => e.map(i => i))
-     table[fil][col] = !table[fil][col]
+     table[fil][col] = !table[fil][col] //reviviro o  matar celula 
     this.setState({
       table
     }) 
   }
+  /*ya que el trablero es esferico para fingirlo  le agrege dos col y fil
+  al tablero y para igualar las esquinas agregadas con los extremos */ 
   borderTable= ()=>{
    
     let table = this.state.table.map(e => e.map(i => i))
