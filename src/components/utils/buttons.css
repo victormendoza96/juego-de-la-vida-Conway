@@ -1,14 +1,14 @@
-
+/* codigo MEJORABLE con SASS */
 button{
   color:#fff;
   text-align: center;
   padding: 8px;
 }
 /*Button game*/
-.button-game {
+.button-stop, .button-restart, .button-game {
   text-align: center;
   cursor: pointer;
-  font-size:7px;
+  font-size:12px;
   background-color:#AAD1DD;
   border: none;
   width: 100px;
@@ -16,12 +16,21 @@ button{
 }
 
 
-.button-game span {
-  cursor: pointer;
+.button-stop span, .button-restart span, .button-game span {
+  
   display: inline-block;
   position: relative;
   transition: 0.5s;
   font-weight: bold;
+}
+
+.button-stop:hover span, .button-restart:hover span, .button-game:hover span {
+  padding-right: 20px;
+}
+
+.button-stop:hover span:after, .button-restart:hover span:after, .button-game:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 
 .button-game span:after {
@@ -33,11 +42,38 @@ button{
   transition: 0.5s;
 }
 
-.button-game:hover span {
-  padding-right: 20px;
+.button-restart span:after {
+  content: '↻';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+.button-stop span:after{
+  content: '＝';
+  position: absolute;
+  font-weight: 500;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+  transform: rotate(90deg);
 }
 
-.button-game:hover span:after {
-  opacity: 1;
-  right: 0;
+.button-speed {
+  text-align: center;
+  cursor: pointer;
+  font-size:12px;
+  background-color:#AAD1DD;
+  width: 50px;
+  border: none;
+  transition: all 0.5s;
+}
+
+.button-speed span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  font-weight: bold;
 }

@@ -1,0 +1,23 @@
+.header{
+  margin: 5px auto;
+  width: 840px; 
+
+}
+.butt-header{
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end
+}
+
+.generate{
+  display: flex;
+  flex-grow: 1;
+
+}
+.table {
+  width: 840px;
+  line-height: 0;
+  margin: auto;
+  margin-top: 10px;
+}
+  

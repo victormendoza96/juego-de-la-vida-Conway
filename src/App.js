@@ -10,7 +10,7 @@ class App extends Component {
     this.cols = 32;
     this.timeGeneration = 300;
     this.state = {//lo que puede cambiar mientras se ejecuta el juego
-      generations: 1,
+      generations: 0,
       table: Array((this.fils)).fill(Array(this.cols ).fill(false))//llenar arreglo de celulas muertas
       
     }
@@ -31,8 +31,6 @@ class App extends Component {
     let table = this.state.table.map(e => e.map(i => i))
     //casos de esquina reflejadas
     table[0][0] = this.state.table[this.fils - 2][this.cols - 2]
-    console.log(`${table[0][0]}00` );
-
     table[0][this.cols - 1] =  this.state.table[this.fils - 2][1]
     table[this.fils - 1][0] = this.state.table[1][this.cols - 2]
     table[this.fils - 1][this.cols - 1] =  this.state.table[1][1]
@@ -54,10 +52,8 @@ class App extends Component {
   }
 
   next = ()=>{
-    console.log(`${this.state.table[0][0]}00` );
     let table = this.borderTable()
     let mirror  = this.borderTable()
-    console.log(table === mirror);
     for( var i = 1; i < this.fils -1; i++){
       for( var j = 1;j < this.cols -1; j++){
         let liveCell = 0
@@ -90,19 +86,50 @@ class App extends Component {
   stop = ()=>{
     clearInterval(this.interval)
   }
-  // restart = ()=>{
-  //   this.setState( this.getInitialState() );
-  // }
+  restart = ()=>{
+    let table = Array((this.fils)).fill(Array(this.cols ).fill(false))
+    let generations = 0
+    this.setState({
+      table,
+      generations
+    });
+    this.stop()
+  }
+
+  slow= () =>{
+   
+    if(this.timeGeneration < 1000 ){
+      this.stop()
+      this.timeGeneration = this.timeGeneration + 100
+
+      console.log(this.timeGeneration);
+      this.playGame()
+    }
+    
+  }
+  fast= () =>{
+   
+    if(this.timeGeneration > 100 ){
+      this.stop()
+      this.timeGeneration = this.timeGeneration - 100
+
+      console.log(this.timeGeneration);
+      this.playGame()
+    }
+    
+  }
   
   render() {
     return (
       <div>
         <div className = "header">
           <div className = "butt-header">
-            <Button function={this.playGame} name = "iniciar"/>
-            <Button function={this.stop} name = "detener"/>
-            <Button function={this.restart} name = "reiniciar"/>
-            <Button function={this.next} name = "siguiente"/>
+            <Button function={this.playGame} name = "iniciar" classbut = "button-game"/>
+            <Button function={this.stop} name = "detener" classbut = "button-stop"/>
+            <Button function={this.restart} name = "reiniciar" classbut = "button-restart"/>
+            <Button function={this.next} name = "siguiente" classbut = "button-game"/>
+            <Button function={this.fast} name = "+" classbut = "button-speed"/>
+            <Button function={this.slow} name = "-" classbut = "button-speed"/>
             <p>Generacion #{this.state.generations}</p>
             
           </div>
