@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import Grid from './components/grid'
 import './App.css';
+import Button from './components/utils/buttons'
 
 class App extends Component {
   constructor(){
     super();
     this.fils = 52;
     this.cols = 32;
-    this.timeGeneration = 100;
+    this.timeGeneration = 300;
     this.state = {//lo que puede cambiar mientras se ejecuta el juego
       generations: 1,
       table: Array((this.fils)).fill(Array(this.cols ).fill(false))//llenar arreglo de celulas muertas
@@ -52,7 +53,7 @@ class App extends Component {
     return table
   }
 
-  play = ()=>{
+  next = ()=>{
     console.log(`${this.state.table[0][0]}00` );
     let table = this.borderTable()
     let mirror  = this.borderTable()
@@ -80,17 +81,32 @@ class App extends Component {
       generations: this.state.generations + 1,
       table
     })
-
   }
+  //inicio juego
+  playGame = ()=>{
+    this.interval = setInterval(this.next, this.timeGeneration)
+  }
+  //detener juego
+  stop = ()=>{
+    clearInterval(this.interval)
+  }
+  // restart = ()=>{
+  //   this.setState( this.getInitialState() );
+  // }
   
-  
-
   render() {
     return (
       <div>
-        <h1>the game of life</h1>
-        <h2>generations: {this.state.generations}</h2>
-        <button onClick= {this.play}></button>
+        <div className = "header">
+          <div className = "butt-header">
+            <Button function={this.playGame} name = "iniciar"/>
+            <Button function={this.stop} name = "detener"/>
+            <Button function={this.restart} name = "reiniciar"/>
+            <Button function={this.next} name = "siguiente"/>
+            <p>Generacion #{this.state.generations}</p>
+            
+          </div>
+        </div>
         <Grid
           table = {this.state.table}
           cols = {this.cols}

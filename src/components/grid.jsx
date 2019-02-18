@@ -30,7 +30,6 @@ export default class Grid extends Component{
                           clickCell ={this.props.clickCell}/>)
        }
      }
-     
      return table
   }
 
