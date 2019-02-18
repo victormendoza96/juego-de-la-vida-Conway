@@ -55,7 +55,7 @@ button{
   position: absolute;
   font-weight: 500;
   opacity: 0;
-  top: 0;
+  top: -2px;
   right: -20px;
   transition: 0.5s;
   transform: rotate(90deg);

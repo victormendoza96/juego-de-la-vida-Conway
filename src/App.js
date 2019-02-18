@@ -25,7 +25,7 @@ class App extends Component {
     }) 
   }
   /*ya que el trablero es esferico para fingirlo  le agrege dos col y fil
-  al tablero y para igualar las esquinas agregadas con los extremos */ 
+  al tablero  para igualar las esquinas agregadas con los extremos de las esquinas que se mostraran */ 
   borderTable= ()=>{
    
     let table = this.state.table.map(e => e.map(i => i))
@@ -47,10 +47,9 @@ class App extends Component {
     for( let i = 1; i < this.fils -1; i++){//right
       table[i][this.cols - 1] = this.state.table[i][1]
     }
-
     return table
   }
-
+  //reglas del juego
   next = ()=>{
     let table = this.borderTable()
     let mirror  = this.borderTable()
@@ -66,14 +65,14 @@ class App extends Component {
         if(mirror[i+1][j]) liveCell++
         if(mirror[i+1][j+1]) liveCell++
         
-        if (mirror[i][j]  && (liveCell < 2 || liveCell > 3)){
+        if (mirror[i][j]  && (liveCell < 2 || liveCell > 3)){//si esta vivo y tiene mucha poblacion o poca muere
           table[i][j] = false
-        }else{
+        }else{//si esta muerto y tiene 3 vecinos revive
           if(!mirror[i][j] && liveCell === 3)table[i][j]= true
         }
       }
     }
-    this.setState({
+    this.setState({//actualiza tabla y generation
       generations: this.state.generations + 1,
       table
     })
@@ -86,6 +85,7 @@ class App extends Component {
   stop = ()=>{
     clearInterval(this.interval)
   }
+  //reiniciar y detengo al reiniciar
   restart = ()=>{
     let table = Array((this.fils)).fill(Array(this.cols ).fill(false))
     let generations = 0
@@ -94,8 +94,9 @@ class App extends Component {
       generations
     });
     this.stop()
+    this.timeGeneration = 300
   }
-
+ //muchas velocidades :)
   slow= () =>{
    
     if(this.timeGeneration < 1000 ){
@@ -105,7 +106,7 @@ class App extends Component {
       console.log(this.timeGeneration);
       this.playGame()
     }
-    
+   //mas rrapido las generaciones 
   }
   fast= () =>{
    
@@ -134,6 +135,7 @@ class App extends Component {
             
           </div>
         </div>
+        {/* paso lo que necesita para la tabla de ref */}
         <Grid
           table = {this.state.table}
           cols = {this.cols}
